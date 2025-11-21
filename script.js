@@ -183,13 +183,114 @@ async function generatePdf(){
 
 /* ================= Jobs data and modal ================= */
 const jobs = [
-  { title:'Software Developer', company:'InnoTech', location:'Jakarta', salary:'Rp 8–20 juta', skills:['JavaScript','Node.js','SQL'], desc:'Membangun & maintain aplikasi web. Pengalaman 1-3 tahun di bidang serupa.' },
-  { title:'Digital Marketing', company:'BrandBoost', location:'Jakarta', salary:'Rp 5–12 juta', skills:['SEO','Ads','Content'], desc:'Mengelola kampanye digital, optimasi SEO & analitik.' },
-  { title:'UI/UX Designer', company:'DesignLab', location:'Bandung', salary:'Rp 5–10 juta', skills:['Figma','Prototyping','User Research'], desc:'Mendesain antarmuka dan alur pengguna untuk produk digital.' },
-  { title:'Data Analyst', company:'DataSolve', location:'Surabaya', salary:'Rp 6–12 juta', skills:['Excel','SQL','Python'], desc:'Analisis data bisnis dan pembuatan dashboard.' },
-  { title:'Customer Service', company:'HelpDesk Co', location:'Semarang', salary:'Rp 3–6 juta', skills:['Communication','MS Office'], desc:'Melayani pelanggan, handling keluhan, admin.' },
-  // add more if desired...
+  { 
+    title: "Software Engineer",
+    category: "Teknologi",
+    description: "Mengembangkan aplikasi, sistem, dan platform digital.",
+  },
+  { 
+    title: "Frontend Developer",
+    category: "Teknologi",
+    description: "Membangun tampilan website menggunakan HTML, CSS, dan JS.",
+  },
+  { 
+    title: "Backend Developer",
+    category: "Teknologi",
+    description: "Mengelola server, database, dan API.",
+  },
+  { 
+    title: "Mobile App Developer",
+    category: "Teknologi",
+    description: "Membuat aplikasi Android & iOS.",
+  },
+  { 
+    title: "UI/UX Designer",
+    category: "Desain",
+    description: "Mendesain pengalaman pengguna dan tampilan interface.",
+  },
+  { 
+    title: "Graphic Designer",
+    category: "Desain",
+    description: "Membuat desain visual untuk branding dan media digital.",
+  },
+  { 
+    title: "Product Manager",
+    category: "Teknologi / Manajemen",
+    description: "Mengatur strategi, fitur, dan perkembangan produk digital.",
+  },
+
+  // EKONOMI & BISNIS  
+  { title: "Akuntan", category: "Ekonomi", description: "Mengelola laporan keuangan dan audit." },
+  { title: "Analis Keuangan", category: "Ekonomi", description: "Menganalisis kondisi finansial bisnis." },
+  { title: "Customer Service", category: "Layanan", description: "Memberikan bantuan kepada pelanggan." },
+  { title: "Administrasi Perkantoran", category: "Perkantoran", description: "Mengelola dokumen dan operasional kantor." },
+  { title: "HR / Rekrutmen", category: "Sumber Daya Manusia", description: "Merekrut dan mengelola karyawan." },
+  { title: "Marketing", category: "Bisnis", description: "Mengatur promosi dan strategi pemasaran." },
+  { title: "Sales Executive", category: "Bisnis", description: "Menjual produk dan menjaga hubungan klien." },
+
+  // PENDIDIKAN  
+  { title: "Guru SD", category: "Pendidikan", description: "Mengajar siswa sekolah dasar." },
+  { title: "Guru SMP/SMA", category: "Pendidikan", description: "Mengajar pelajaran sesuai bidang." },
+  { title: "Tutor Bimbel", category: "Pendidikan", description: "Membantu siswa memahami materi pelajaran." },
+  { title: "Dosen", category: "Pendidikan", description: "Mengajar di perguruan tinggi." },
+
+  // KESEHATAN  
+  { title: "Perawat", category: "Kesehatan", description: "Merawat pasien di klinik atau rumah sakit." },
+  { title: "Dokter Umum", category: "Kesehatan", description: "Memberikan pelayanan medis dasar." },
+  { title: "Apoteker", category: "Kesehatan", description: "Meracik dan mengelola obat." },
+  { title: "Ahli Gizi", category: "Kesehatan", description: "Mengatur pola makan dan kesehatan nutrisi." },
+
+  // INDUSTRI  
+  { title: "Operator Produksi", category: "Pabrik / Industri", description: "Menjalankan mesin produksi." },
+  { title: "Quality Control", category: "Industri", description: "Mengawasi kualitas hasil produksi." },
+  { title: "Teknisi Mesin", category: "Industri", description: "Maintenance alat dan permesinan." },
+
+  // TRANSPORTASI  
+  { title: "Driver", category: "Transportasi", description: "Mengemudikan kendaraan untuk pengiriman." },
+  { title: "Kurir", category: "Logistik", description: "Mengantar paket kepada pelanggan." },
+  { title: "Operator Forklift", category: "Logistik", description: "Mengoperasikan forklift untuk memindahkan barang." },
+
+  // HOSPITALITY  
+  { title: "Barista", category: "Kuliner", description: "Membuat dan menyajikan kopi." },
+  { title: "Chef", category: "Kuliner", description: "Mengolah dan membuat makanan." },
+  { title: "Waiter/Waitress", category: "Hospitality", description: "Melayani tamu restoran." },
+  { title: "Resepsionis", category: "Perhotelan", description: "Melayani tamu di hotel atau kantor." },
+
+  // MEDIA  
+  { title: "Content Creator", category: "Media", description: "Membuat konten untuk media sosial." },
+  { title: "Video Editor", category: "Media", description: "Mengedit dan merangkai video." },
+  { title: "Fotografer", category: "Media", description: "Mengambil foto untuk kebutuhan profesional." },
+  { title: "Social Media Specialist", category: "Media", description: "Mengelola akun media sosial." },
+
+  // KREATIF DIGITAL  
+  { title: "Animator 2D/3D", category: "Animasi", description: "Membuat animasi untuk film atau iklan." },
+  { title: "Game Developer", category: "Game", description: "Membangun game untuk mobile/PC." },
+  { title: "VFX Artist", category: "Film", description: "Membuat efek visual untuk video." },
+
+  // PEMERINTAHAN  
+  { title: "Staff Administrasi Pemerintahan", category: "Pemerintahan", description: "Mengelola data dan layanan publik." },
+  { title: "Pegawai BUMN", category: "BUMN", description: "Bekerja di perusahaan milik negara." },
+  { title: "Arsiparis", category: "Pemerintahan", description: "Mengelola arsip dan dokumen negara." },
+
+  // PEKERJAAN LAPANGAN  
+  { title: "Surveyor", category: "Lapangan", description: "Melakukan pengukuran dan survei lokasi." },
+  { title: "Petugas Lapangan", category: "Lapangan", description: "Bekerja di area proyek atau konstruksi." },
+  { title: "Security", category: "Keamanan", description: "Menjaga keamanan lingkungan kerja." },
+
+  // FREELANCE  
+  { title: "Freelancer", category: "Freelance", description: "Bekerja sesuai proyek, fleksibel waktu." },
+  { title: "Copywriter", category: "Freelance", description: "Menulis teks promosi dan artikel." },
+  { title: "Translator", category: "Freelance", description: "Menerjemahkan dokumen atau percakapan." },
+
+  // LAINNYA  
+  { title: "Data Analyst", category: "Teknologi", description: "Analisis data untuk kebutuhan bisnis." },
+  { title: "Data Entry", category: "Admin", description: "Memasukkan dan mengelola data." },
+  { title: "Project Manager", category: "Manajemen", description: "Memimpin dan mengawasi proyek." },
+  { title: "Logistic Staff", category: "Logistik", description: "Mengatur distribusi dan pengiriman barang." },
+  { title: "Digital Marketing", category: "Marketing", description: "Mengelola kampanye digital." },
+  { title: "SEO Specialist", category: "Marketing", description: "Optimasi website agar tampil di Google." }
 ];
+
 
 /* render jobs grid */
 const jobsGrid = document.getElementById('jobsGrid');
