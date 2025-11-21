@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AutoCV — Modern CV Builder</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body class="theme-pastel">
+
+  <!-- Floating Navbar -->
+  <nav class="nav-glass">
+    <div class="brand">AutoCV</div>
+    <div class="nav-actions">
+      <button id="themeToggle" title="Toggle theme">🌙</button>
+      <a href="#slide2" class="nav-link">Buat CV</a>
+      <a href="#slide3" class="nav-link">Info Pekerjaan</a>
+    </div>
+  </nav>
+
+  <!-- Dot Navigation -->
+  <ul class="dot-nav" id="dotNav" aria-hidden="false">
+    <li class="dot active" data-slide="1"></li>
+    <li class="dot" data-slide="2"></li>
+    <li class="dot" data-slide="3"></li>
+  </ul>
+
+  <!-- Container slides -->
+  <main id="slidesContainer">
+    <!-- Slide 1: Landing -->
+    <section class="slide" id="slide1" data-index="1">
+      <div class="glass-panel">
+        <h1 class="title">AutoCV</h1>
+        <p class="subtitle">Buat CV profesional dengan cepat. Jelajahi info pekerjaan di Indonesia dan unduh CV-mu dalam format PDF.</p>
+        <div class="cta-row">
+          <button class="btn primary" onclick="goToSlide(2)">Mulai Buat CV</button>
+          <button class="btn ghost" onclick="goToSlide(3)">Lihat Info Pekerjaan</button>
+        </div>
+        <div class="scroll-hint">Scroll / Swipe untuk melanjutkan ↓</div>
+      </div>
+    </section>
+
+    <!-- Slide 2: CV Generator -->
+    <section class="slide" id="slide2" data-index="2">
+      <div class="glass-panel panel-wide">
+        <div class="panel-grid">
+          <div class="form-side">
+            <h2>Buat CV Otomatis</h2>
+
+            <form id="cvForm">
+              <div class="field">
+                <label>Nama Lengkap</label>
+                <input id="name" type="text" placeholder="Nama lengkap" required>
+              </div>
+
+              <div class="field two-cols">
+                <div>
+                  <label>Email</label>
+                  <input id="email" type="email" placeholder="email@contoh.com">
+                </div>
+                <div>
+                  <label>Telepon</label>
+                  <input id="phone" type="text" placeholder="08xxxxxxxxxx">
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Pendidikan & Jurusan</label>
+                <input id="education" type="text" placeholder="S1 - Teknik Informatika">
+              </div>
+
+              <div class="field">
+                <label>Skill (pisah dengan koma)</label>
+                <input id="skillsInput" type="text" placeholder="HTML, CSS, JavaScript, React">
+              </div>
+
+              <div class="field">
+                <label>Pengalaman singkat</label>
+                <textarea id="experience" rows="3" placeholder="Contoh: 2 tahun sebagai Frontend dev"></textarea>
+              </div>
+
+              <div class="actions-row">
+                <button type="submit" class="btn primary">Generate Preview</button>
+                <button type="button" id="downloadPdfBtn" class="btn outline">Download PDF</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="preview-side">
+            <h3>Preview CV</h3>
+            <div id="cvPreview" class="cv-card">
+              <div class="cv-empty">Preview akan muncul di sini setelah klik "Generate Preview"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Jobs Info -->
+    <section class="slide" id="slide3" data-index="3">
+      <div class="glass-panel panel-wide">
+        <h2>Informasi Pekerjaan di Indonesia</h2>
+        <p class="muted">Klik card untuk melihat detail tiap pekerjaan.</p>
+
+        <div id="jobsGrid" class="jobs-grid">
+          <!-- Job cards will be injected here by JS -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal for job details -->
+  <div id="jobModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Next/Prev floating buttons -->
+  <div class="nav-float">
+    <button id="prevBtn" class="nav-arrow" title="Previous">◀</button>
+    <button id="nextBtn" class="nav-arrow" title="Next">▶</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
