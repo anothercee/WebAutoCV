@@ -1,0 +1,187 @@
+/* ================= GLOBAL ================= */
+:root{
+  --radius: 18px;
+  --glass-bg: rgba(255,255,255,0.12);
+  --glass-border: rgba(255,255,255,0.12);
+  --text: #111;
+  --muted: #6b6b6b;
+  --accent: #ff9acb; /* pastel pink */
+  --accent-2: #a8f0e6; /* pastel mint/cyan */
+  --bg-gradient: linear-gradient(135deg,#fff9f6,#f2f8ff);
+}
+
+/* THEMES */
+/* Pastel (default) */
+body.theme-pastel{
+  --bg-gradient: linear-gradient(135deg,#fff6fb,#f0fcff,#fff6ea);
+  --glass-bg: rgba(255,255,255,0.18);
+  --text: #17212b;
+  --muted: #6b7180;
+  --accent: #ffb6d5;
+  --accent-2: #a8e6dd;
+  background: var(--bg-gradient);
+  color: var(--text);
+}
+
+/* Dark */
+body.theme-dark{
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.06);
+  --text: #e9eef8;
+  --muted: #b7c1d1;
+  --accent: #ff7fb1;
+  --accent-2: #38c6b9;
+  background: linear-gradient(135deg,#071021,#0e121a);
+  color: var(--text);
+}
+
+/* base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, Poppins, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow:hidden; /* we control scrolling per slide */
+  transition: background 0.4s ease, color 0.3s ease;
+}
+
+/* NAVBAR (glass) */
+.nav-glass{
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:1200;
+  width: calc(100% - 60px);
+  max-width:980px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 18px;
+  border-radius:40px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px) saturate(120%);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+}
+.nav-glass .brand{font-weight:700;letter-spacing:0.4px}
+.nav-glass .nav-actions{display:flex;gap:12px;align-items:center}
+.nav-link{color:var(--text);text-decoration:none;padding:8px 12px;border-radius:12px}
+.nav-link:hover{background:rgba(255,255,255,0.06)}
+
+/* DOT NAV */
+.dot-nav{
+  position:fixed; right:24px; top:50%; transform:translateY(-50%);
+  list-style:none; padding:0; margin:0; z-index:1100;
+}
+.dot-nav .dot{
+  width:12px; height:12px; border-radius:50%; margin:8px 0; cursor:pointer;
+  background:rgba(255,255,255,0.5); border:2px solid rgba(0,0,0,0.05);
+  transition: transform .25s ease, background .25s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+.dot-nav .dot.active{ transform:scale(1.25); background:var(--accent)}
+
+/* SLIDES CONTAINER */
+#slidesContainer{
+  height:100vh;
+  width:100%;
+  scroll-snap-type:y mandatory;
+  overflow-y:scroll;
+  scroll-behavior:smooth;
+}
+
+/* slide */
+.slide{
+  min-height:100vh; height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  padding:40px;
+  scroll-snap-align:start;
+  transition:background .45s ease;
+}
+
+/* glass panel */
+.glass-panel{
+  width:100%;
+  max-width:1100px;
+  border-radius:var(--radius);
+  padding:30px;
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  backdrop-filter: blur(10px) saturate(120%);
+  box-shadow: 0 20px 50px rgba(16,24,40,0.08);
+  animation:cardIn .9s ease both;
+}
+@keyframes cardIn{
+  from{opacity:0; transform: translateY(28px) scale(.995)}
+  to{opacity:1; transform: translateY(0) scale(1)}
+}
+
+/* Slide 1 specifics */
+#slide1 .glass-panel{ text-align:center; padding:48px}
+.title{ font-size:48px; margin-bottom:8px; letter-spacing:-1px}
+.subtitle{ color:var(--muted); margin-bottom:20px}
+
+/* CTA */
+.cta-row{display:flex; gap:12px; justify-content:center; margin-top:18px}
+.btn{ padding:12px 18px; border-radius:14px; border:none; cursor:pointer; font-weight:600}
+.btn.primary{ background: linear-gradient(90deg,var(--accent), var(--accent-2)); color:white; box-shadow: 0 8px 30px rgba(0,0,0,0.08)}
+.btn.ghost{ background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.06)}
+.btn.outline{ background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.12)}
+
+/* Slide 2 grid */
+.panel-grid{ display:grid; grid-template-columns: 1fr 420px; gap:22px; align-items:start }
+.panel-wide{ max-width:1150px}
+.form-side h2{ margin:0 0 14px}
+.field{ margin-bottom:12px}
+.field.two-cols{ display:flex; gap:12px}
+.field label{ font-size:14px; color:var(--muted); display:block; margin-bottom:6px}
+input[type="text"], input[type="email"], textarea{
+  width:100%; padding:10px 12px; border-radius:10px; border:none; outline:none;
+  background: rgba(255,255,255,0.22); color:var(--text);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+textarea{ resize:vertical; min-height:80px}
+
+/* preview CV card */
+.cv-card{
+  border-radius:14px; padding:16px; background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  min-height:240px; color:var(--text);
+}
+.cv-empty{ color:var(--muted); font-style:italic}
+
+/* Slide 3 jobs grid */
+.jobs-grid{
+  margin-top:18px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:16px;
+}
+.job-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border-radius:12px; padding:14px; cursor:pointer; transition: transform .28s ease, box-shadow .28s ease;
+  border:1px solid rgba(255,255,255,0.03);
+}
+.job-card:hover{ transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.12)}
+.job-title{ font-weight:700; margin-bottom:6px}
+.job-meta{ color:var(--muted); font-size:13px}
+
+/* modal */
+.modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:2000; background: rgba(6,8,12,0.45); }
+.modal.hidden{ display:none }
+.modal-content{ width:calc(100% - 60px); max-width:760px; border-radius:16px; padding:20px; background:var(--glass-bg); border:1px solid var(--glass-border); backdrop-filter: blur(9px) }
+.modal-close{ position:absolute; right:18px; top:18px; border:none; background:transparent; font-size:18px; cursor:pointer; }
+
+/* nav float arrows */
+.nav-float{ position:fixed; left:20px; bottom:30px; display:flex; gap:10px; z-index:1100}
+.nav-arrow{ border:none; background:var(--glass-bg); padding:10px 12px; border-radius:10px; cursor:pointer; backdrop-filter: blur(6px) }
+
+/* small / responsive */
+@media (max-width:980px){
+  .panel-grid{ grid-template-columns:1fr; }
+  #slidesContainer{ padding-bottom:60px }
+  .nav-glass{ width: calc(100% - 28px); left:14px; transform:none }
+  .dot-nav{ right:10px }
+}
+
+/* micro interactions */
+.muted{ color:var(--muted) }
